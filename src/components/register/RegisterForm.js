@@ -9,6 +9,7 @@ import {
   Text,
   Keyboard
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -26,9 +27,9 @@ class RegisterForm extends Component {
 
   renderCloseToolbar() {
     return (
-      <View style={styles.closeButtonContainer}>
-        <TouchableOpacity style={styles.closeButton} onPress={this.onChooseGender}>
-          <Text style={styles.closeButtonText}>Choose</Text>
+      <View style={styles.chooseButtonContainer}>
+        <TouchableOpacity style={styles.chooseButton} onPress={this.onChooseGender}>
+          <Text>Choose</Text>
         </TouchableOpacity>
       </View>
     );
@@ -36,7 +37,7 @@ class RegisterForm extends Component {
 
   renderPicker() {
     return (
-      <View style={styles.pickerContainer}>
+      <View style={styles.pickerItem}>
         <PickerIOS
           selectedValue={this.state.gender}
           onValueChange={(itemValue, itemIndex) => this.setState({ gender: itemValue })}
@@ -64,42 +65,50 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <View style={styles.containter}>
-        <TextInput
-          placeholder="Email"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          keyboardType="email-address"
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Full name"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          style={styles.input}
-        />
-        <TouchableOpacity style={styles.genderButton} onPress={this.onGenderClick}>
-          <Text style={styles.genderText}>{this.genderValue(this.state.gender)}</Text>
-        </TouchableOpacity>
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Retype password"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          style={styles.input}
-        />
-
-        {this.state.picker ? this.renderCloseToolbar() : null}
-        {this.state.picker ? this.renderPicker() : null}
-      </View>
+      <KeyboardAwareScrollView keyboardShouldPersistTaps="always" style={styles.container}>
+        <View style={styles.formContainer}>
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            keyboardType="email-address"
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Full name"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            style={styles.input}
+          />
+          <TouchableOpacity style={styles.genderButton} onPress={this.onGenderClick}>
+            <Text style={styles.genderText}>{this.genderValue(this.state.gender)}</Text>
+          </TouchableOpacity>
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Retype password"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            style={styles.input}
+          />
+        </View>
+        <View style={styles.pickerContainer}>
+          {this.state.picker ? this.renderCloseToolbar() : null}
+          {this.state.picker ? this.renderPicker() : null}
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  containter: {
-    padding: 20
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#3498db'
+  },
+  formContainer: {
+    flex: 1
   },
   input: {
     height: 40,
@@ -118,29 +127,29 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 10
   },
-  closeButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+  chooseButtonContainer: {
     borderTopColor: '#e2e2e2',
     borderTopWidth: 1,
+    borderBottomColor: '#e2e2e2',
+    borderBottomWidth: 1,
     backgroundColor: '#FFF',
-    marginLeft: -20,
-    marginRight: -20
+    alignItems: 'flex-end',
+    paddingRight: 10
   },
-  closeButton: {
+  chooseButton: {
     paddingRight: 10,
     paddingTop: 10,
     paddingBottom: 10
   },
-  closeButtonText: {
-    // color: '#FFF'
-  },
   pickerContainer: {
-    marginLeft: -20,
-    marginRight: -20,
-    marginTop: 0,
-    backgroundColor: '#FFF',
-    height: 300
+    flex: 1,
+    marginTop: 5,
+    paddingBottom: 70,
+    marginLeft: -10,
+    marginRight: -10
+  },
+  pickerItem: {
+    backgroundColor: '#FFF'
   }
 });
 
