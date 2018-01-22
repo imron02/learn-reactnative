@@ -12,9 +12,14 @@ class Register extends Component {
     }
   };
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const { goBack } = this.props.navigation;
     return (
-      <RegisterForm />
+      <RegisterForm goBack={goBack} />
     );
   }
 }
