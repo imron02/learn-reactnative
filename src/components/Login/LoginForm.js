@@ -22,6 +22,7 @@ class LoginForm extends Component {
         <TextInput 
           placeholder="Username or email"
           placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid='rgba(0,0,0,0)'
           keyboardType="email-address"
           autoCorrect={false}
           returnKeyType="next"
@@ -31,6 +32,7 @@ class LoginForm extends Component {
         <TextInput 
           placeholder="Password"
           placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid='rgba(0,0,0,0)'
           secureTextEntry={true}
           returnKeyType="go"
           ref={(input) => this.passwordInput = input}
