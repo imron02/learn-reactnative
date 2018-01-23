@@ -17,9 +17,8 @@ class Register extends Component {
   }
 
   render() {
-    const { goBack } = this.props.navigation;
     return (
-      <RegisterForm goBack={goBack} />
+      <RegisterForm />
     );
   }
 }

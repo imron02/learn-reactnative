@@ -12,10 +12,6 @@ import {
 import LoginForm from './LoginForm';
 
 class Login extends Component {
-  static navigationOptions = {
-    title: 'Login',
-    header: null
-  };
 
   constructor(props) {
     super(props);
@@ -26,7 +22,7 @@ class Login extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigator } = this.props;
 
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -41,7 +37,7 @@ class Login extends Component {
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={this.hideKeyboard}>
           <View style={styles.formContainer}>
-            <LoginForm navigation={navigate} />
+            <LoginForm navigator={navigator} />
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

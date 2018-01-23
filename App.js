@@ -6,19 +6,19 @@
 
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import Login from './src/components/Login/Login';
-import Register from './src/components/Register/Register';
+import { Navigation } from 'react-native-navigation';
+import { registerScreens } from './src/components/Screens';
 
-const Flutter = StackNavigator({
-  Login: { screen: Login },
-  Register: { screen: Register },
-});
+registerScreens(); // this is where you register all of your app's screens
 
-export default class App extends Component {
-  render() {
-    return (
-      <Flutter />
-    );
+// start the app
+Navigation.startSingleScreenApp({
+  screen: {
+    screen: 'flutterasia.LoginScreen',
+    title: 'Login',
+    navigatorStyle: {
+      navBarHidden: true
+    },
+    navigatorButtons: {}
   }
-}
+});

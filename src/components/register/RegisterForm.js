@@ -9,7 +9,9 @@ import {
   Text,
   Keyboard,
   ScrollView,
-  Platform
+  Platform,
+  ActionSheetIOS,
+  CameraRoll
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -94,9 +96,9 @@ class RegisterForm extends Component {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  onRegister = () => {
-    this.props.goBack();
-  }
+  onPhoto = () => {
+    
+  };
 
   render() {
     return (
@@ -127,13 +129,15 @@ class RegisterForm extends Component {
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 underlineColorAndroid='rgba(0,0,0,0)'
                 style={styles.input} />
-              <View style={styles.photoContainer}>
+              <TouchableOpacity
+                style={styles.photoContainer}
+                onPress={this.onPhoto}>
                 <Text style={styles.photoText}>Add Photo</Text>
-              </View>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.buttonRegister}>
                 <Text style={styles.buttonTextRegister}>REGISTER</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={this.onRegister}>
+              <TouchableOpacity>
                 <Text style={styles.buttonTextRegister}>Already have an account? Log In</Text>
               </TouchableOpacity>
             </View>

@@ -4,16 +4,23 @@ import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar } from '
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-
-    this.onRegister = this.onRegister.bind(this);
   }
 
   onLogin() {
     console.log(123);
   }
 
-  onRegister() {
-    this.props.navigation('Register');
+  onRegister = () => {
+    this.props.navigator.push({
+      screen: 'flutterasia.RegisterScreen',
+      title: 'Register',
+      navigatorStyle: {
+        navBarTextColor: 'rgba(255,255,255,0.7)',
+        navBarBackgroundColor: '#3498db',
+        navBarButtonColor: 'rgba(255,255,255,0.7)',
+        statusBarTextColorScheme: 'light'
+      }
+    });
   }
 
   render() {
