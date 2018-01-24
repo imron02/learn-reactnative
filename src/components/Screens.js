@@ -1,8 +1,8 @@
 import { Navigation } from 'react-native-navigation';
-import Login from './Login/Login';
-import Register from './Register/Register';
+import Login from './login/login';
+import Register from './register/register';
 
-export function registerScreens() {
-  Navigation.registerComponent('flutterasia.LoginScreen', () => Login);
-  Navigation.registerComponent('flutterasia.RegisterScreen', () => Register);
+export function registerScreens(store, Provider) {
+  Navigation.registerComponent('flutterasia.LoginScreen', () => Login, store, Provider);
+  Navigation.registerComponent('flutterasia.RegisterScreen', () => Register, store, Provider);
 }
