@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StatusBar
+} from 'react-native';
+import { connect } from 'react-redux';
+import { login } from '../../actions/auth';
+import { appDashboard } from '../../actions/app';
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      username: null,
+      password: null
+    };
   }
 
-  onLogin() {
-    console.log(123);
+  _login = () => {
+    this.props.onLogin(this.state.username, this.state.password);
+
+    // Change root view
+    console.log(this.props, 444);
+    this.props.goToDashboard();
   }
 
-  onRegister = () => {
+  _register = () => {
     this.props.navigator.push({
       screen: 'flutterasia.RegisterScreen',
       title: 'Register',
@@ -26,7 +45,7 @@ class LoginForm extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput 
+        <TextInput
           placeholder="Username or email"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid='rgba(0,0,0,0)'
@@ -34,21 +53,23 @@ class LoginForm extends Component {
           autoCorrect={false}
           returnKeyType="next"
           onSubmitEditing={() => this.passwordInput.focus()}
-          style={styles.input} 
+          onChangeText={(text) => this.setState({ username: text })}
+          style={styles.input}
         />
-        <TextInput 
+        <TextInput
           placeholder="Password"
           placeholderTextColor="rgba(255,255,255,0.7)"
           underlineColorAndroid='rgba(0,0,0,0)'
           secureTextEntry={true}
           returnKeyType="go"
           ref={(input) => this.passwordInput = input}
-          style={styles.input} 
+          onChangeText={(text) => this.setState({ password: text })}
+          style={styles.input}
         />
-        <TouchableOpacity style={styles.buttonLogin}>
+        <TouchableOpacity style={styles.buttonLogin} onPress={this._login}>
           <Text style={styles.buttonTextLogin}>LOGIN</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.onRegister}>
+        <TouchableOpacity onPress={this._register}>
           <Text style={styles.buttonTextLogin}>New to Flutter Asia? Sign up</Text>
         </TouchableOpacity>
       </View>
@@ -79,4 +100,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginForm;
+mapStateToProps = (state, ownProps) => {
+  return {
+    auth: state.auth
+  }
+}
+
+mapDispatchToProps = (dispatch) => {
+  return {
+    onLogin: (username, password) => dispatch(login(username, password)),
+    goToDashboard: () => dispatch(appDashboard())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
