@@ -1,24 +1,63 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import { registerScreens } from './src/components/Screens';
+import { registerScreens } from './src/components/screens';
+import { Provider } from 'react-redux';
+import store from './src/stores/configureStore';
+import { connect } from 'react-redux';
+import { appInitialized } from './src/actions/app';
 
-registerScreens(); // this is where you register all of your app's screens
+registerScreens(store, Provider);
 
 // start the app
-Navigation.startSingleScreenApp({
-  screen: {
-    screen: 'flutterasia.LoginScreen',
-    title: 'Login',
-    navigatorStyle: {
-      navBarHidden: true
-    },
-    navigatorButtons: {}
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    store.subscribe(this.onStoreUpdate.bind(this));
+    store.dispatch(appInitialized());
   }
-});
+
+  onStoreUpdate() {
+    const { root } = store.getState().app;
+
+    if (this.currentRoot != root) {
+      this.currentRoot = root;
+      this.startApp(root);
+    }
+  }
+
+  startApp(root) {
+    switch (root) {
+      case 'login':
+        Navigation.startSingleScreenApp({
+          screen: {
+            screen: 'flutterasia.LoginScreen',
+            title: 'Login',
+            navigatorStyle: {
+              navBarHidden: true
+            },
+            navigatorButtons: {}
+          }
+        });
+        break;
+      case 'dashboard':
+        Navigation.startSingleScreenApp({
+          screen: {
+            screen: 'flutterasia.RegisterScreen',
+            title: 'Login',
+            navigatorStyle: {
+              navBarHidden: true
+            },
+            navigatorButtons: {}
+          }
+        });
+        break;
+      default:
+        console.error('Unknown app root');
+        break;
+    }
+  }
+}
+
+export default App;
