@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import RegisterForm from './register-form';
 
 class Register extends Component {
-  static navigationOptions = {
-    title: 'Register',
-    headerTintColor: 'rgba(255,255,255,0.7)',
-    headerStyle: {
-      backgroundColor: '#3498db',
-      borderBottomColor: '#2F95D6',
-      borderBottomWidth: 3,
-    }
+  static navigatorStyle = {
+    navBarTextColor: 'rgba(255,255,255,0.7)',
+    navBarBackgroundColor: '#3498db',
+    navBarButtonColor: 'rgba(255,255,255,0.7)',
+    statusBarTextColorScheme: 'light'
   };
 
   constructor(props) {
@@ -17,8 +14,10 @@ class Register extends Component {
   }
 
   render() {
+    const { navigator } = this.props;
+
     return (
-      <RegisterForm />
+      <RegisterForm navigator={navigator} />
     );
   }
 }

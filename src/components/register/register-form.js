@@ -96,9 +96,9 @@ class RegisterForm extends Component {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  onPhoto = () => {
-    
-  };
+  _backToLogin = () => {
+    this.props.navigator.pop();
+  }
 
   render() {
     return (
@@ -137,7 +137,7 @@ class RegisterForm extends Component {
               <TouchableOpacity style={styles.buttonRegister}>
                 <Text style={styles.buttonTextRegister}>REGISTER</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this._backToLogin}>
                 <Text style={styles.buttonTextRegister}>Already have an account? Log In</Text>
               </TouchableOpacity>
             </View>
