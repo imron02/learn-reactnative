@@ -1,3 +1,5 @@
+import * as type from '../constants/auth';
+
 const initialState = {
   isLoggedIn: false,
   username: '',
@@ -6,14 +8,14 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'LOGIN':
+    case type.LOGIN:
       return {
         ...state,
         isLoggedIn: true,
         username: action.username,
         password: action.password
       };
-    case 'LOGOUT':
+    case type.LOGOUT:
       return {
         ...state,
         isLoggedIn: false,

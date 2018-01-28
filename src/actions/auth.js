@@ -1,7 +1,8 @@
+import * as type from '../constants/auth';
 
 export function login(username, password) {
   return {
-    type: 'LOGIN',
+    type: type.LOGIN,
     username: username,
     password: password
   };
@@ -9,6 +10,6 @@ export function login(username, password) {
 
 export const logout = () => {
   return {
-    type: 'LOGOUT'
+    type: type.LOGOUT
   };
 };
