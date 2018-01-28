@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import {
   View,
-  TextInput,
   StyleSheet,
-  PickerIOS,
-  Picker,
   TouchableOpacity,
   Text,
   Keyboard,
   ScrollView,
-  Platform,
-  ActionSheetIOS,
-  CameraRoll
+  Platform
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Input } from './common';
+import PickerGender from './common/picker-gender'
+import GenderButton from './common/gender-button'
 
 class RegisterForm extends Component {
   contentHeight = 0;
@@ -31,51 +29,37 @@ class RegisterForm extends Component {
   renderButtonPicker() {
     if (Platform.OS == 'ios') {
       return (
-        <TouchableOpacity style={styles.genderButton} onPress={this.onGenderClick}>
-          <Text style={styles.genderText}>{this.genderValue(this.state.gender)}</Text>
-        </TouchableOpacity>
+        <GenderButton click={this.onGenderClick} value={this.genderValue(this.state.gender)} />
       );
     }
 
-    if (Platform.OS == 'android') {
+    // if (Platform.OS == 'android') {
+    //   return (
+    //     <PickerGender value={(itemValue, itemIndex) => this.setState({ gender: itemValue })} />
+    //     // <View style={styles.pickerAndroidContainer}>
+    //     //   <Picker
+    //     //     mode="dropdown"
+    //     //     style={styles.pickerAndroid}
+    //     //     selectedValue={this.state.gender}
+    //     //     onValueChange={(itemValue, itemIndex) => this.setState({ gender: itemValue })}>
+    //     //     <Picker.Item label="Select" value={"select"} />
+    //     //     <Picker.Item label="Male" value={"male"} />
+    //     //     <Picker.Item label="Female" value={"female"} />
+    //     //   </Picker>
+    //     // </View>
+    //   );
+    // }
+  }
+
+  renderPickerIOS() {
+    if (Platform.OS == 'ios') {
       return (
-        <View style={styles.pickerAndroidContainer}>
-          <Picker
-            mode="dropdown"
-            style={styles.pickerAndroid}
-            selectedValue={this.state.gender}
-            onValueChange={(itemValue, itemIndex) => this.setState({ gender: itemValue })}>
-            <Picker.Item label="Select" value={"select"} />
-            <Picker.Item label="Male" value={"male"} />
-            <Picker.Item label="Female" value={"female"} />
-          </Picker>
-        </View>
+        <PickerGender
+          click={this.onChooseGender}
+          selectedValue={this.state.gender}
+          onValueChange={(value, index) => this.setState({ gender: value })} />
       );
     }
-  }
-
-  renderCloseToolbar() {
-    return (
-      <View style={styles.chooseButtonContainer}>
-        <TouchableOpacity style={styles.chooseButton} onPress={this.onChooseGender}>
-          <Text>Choose</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  renderPicker() {
-    return (
-      <View style={styles.pickerItem}>
-        <PickerIOS
-          selectedValue={this.state.gender}
-          onValueChange={(itemValue, itemIndex) => this.setState({ gender: itemValue })}>
-          <PickerIOS.Item label="Select" value={"select"} />
-          <PickerIOS.Item label="Male" value={"male"} />
-          <PickerIOS.Item label="Female" value={"female"} />
-        </PickerIOS>
-      </View>
-    );
   }
 
   onChooseGender = () => {
@@ -107,28 +91,11 @@ class RegisterForm extends Component {
           ref={(scrollView) => this.scrollView = scrollView}>
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
             <View style={styles.formContainer}>
-              <TextInput
-                placeholder="Email"
-                placeholderTextColor="rgba(255,255,255,0.7)"
-                keyboardType="email-address"
-                underlineColorAndroid='rgba(0,0,0,0)'
-                style={styles.input} />
-              <TextInput
-                placeholder="Full name"
-                placeholderTextColor="rgba(255,255,255,0.7)"
-                underlineColorAndroid='rgba(0,0,0,0)'
-                style={styles.input} />
+              <Input placeholder="Email" />
+              <Input placeholder="Full name" />
               {this.renderButtonPicker()}
-              <TextInput
-                placeholder="Password"
-                placeholderTextColor="rgba(255,255,255,0.7)"
-                underlineColorAndroid='rgba(0,0,0,0)'
-                style={styles.input} />
-              <TextInput
-                placeholder="Retype password"
-                placeholderTextColor="rgba(255,255,255,0.7)"
-                underlineColorAndroid='rgba(0,0,0,0)'
-                style={styles.input} />
+              <Input placeholder="Password" />
+              <Input placeholder="Retype password" />
               <TouchableOpacity
                 style={styles.photoContainer}
                 onPress={this.onPhoto}>
@@ -141,10 +108,7 @@ class RegisterForm extends Component {
                 <Text style={styles.buttonTextRegister}>Already have an account? Log In</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.pickerContainer}>
-              {this.state.picker ? this.renderCloseToolbar() : null}
-              {this.state.picker ? this.renderPicker() : null}
-            </View>
+            {this.state.picker ? this.renderPickerIOS() : null}
           </KeyboardAwareScrollView>
         </ScrollView >
       </View>
@@ -160,46 +124,6 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     padding: 10
-  },
-  input: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    color: '#FFF'
-  },
-  genderButton: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 20
-  },
-  genderText: {
-    color: '#FFF',
-    paddingTop: 10,
-    paddingHorizontal: 10
-  },
-  chooseButtonContainer: {
-    borderTopColor: '#e2e2e2',
-    borderTopWidth: 1,
-    borderBottomColor: '#e2e2e2',
-    borderBottomWidth: 1,
-    backgroundColor: '#FFF',
-    alignItems: 'flex-end',
-    paddingRight: 10
-  },
-  chooseButton: {
-    paddingRight: 10,
-    paddingTop: 10,
-    paddingBottom: 10
-  },
-  pickerContainer: {
-    flex: 1,
-    marginTop: 5
-  },
-  pickerItem: {
-    backgroundColor: '#FFF',
-    marginLeft: -10,
-    marginRight: -10
   },
   photoContainer: {
     flex: 1,
@@ -219,23 +143,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'rgba(255,255,255,0.7)'
   },
-  pickerAndroidContainer: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 20,
-  },
-  pickerAndroid: {
-    height: 40,
-    color: '#FFF'
-  },
   buttonRegister: {
     backgroundColor: '#2980b9',
     paddingVertical: 15,
     marginBottom: 10
-  },
-  buttonTextRegister: {
-    textAlign: 'center',
-    fontWeight: '700',
-    color: '#FFF'
   },
   buttonTextRegister: {
     textAlign: 'center',
