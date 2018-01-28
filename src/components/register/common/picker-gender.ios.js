@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
 import { StyleSheet, PickerIOS, View, TouchableOpacity, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { changeGender, changePicker } from '../../../actions/register';
 
 class PickerGender extends Component {
   onValueChange = (itemValue, itemIndex) => {
-    this.props.onValueChange(itemValue, itemIndex);
+    this.props.onChangeGender(itemValue, itemIndex);
   };
 
+  onClick = () => {
+    let picker = !this.props.picker;
+    this.props.onChangePicer(picker);
+  }
+
   render() {
-    const { click, selectedValue } = this.props;
+    const { genderValue } = this.props;
 
     return (
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={click}>
+          <TouchableOpacity style={styles.button} onPress={this.onClick}>
             <Text>Choose</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.pickerItem}>
           <PickerIOS
-            selectedValue={selectedValue}
+            selectedValue={genderValue}
             onValueChange={this.onValueChange}>
             <PickerIOS.Item label="Select" value={"select"} />
             <PickerIOS.Item label="Male" value={"male"} />
@@ -37,11 +44,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   buttonContainer: {
-    borderTopColor: '#e2e2e2',
-    borderTopWidth: 1,
-    borderBottomColor: '#e2e2e2',
-    borderBottomWidth: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#cacdd2',
     alignItems: 'flex-end',
     paddingRight: 10
   },
@@ -51,10 +54,25 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   pickerItem: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#cacdd2',
     marginLeft: -10,
     marginRight: -10
   }
 });
 
-export default PickerGender;
+mapStateToProps = (state, ownProps) => {
+  return {
+    picker: state.register.picker,
+    genderValue: state.register.genderValue,
+    genderItem: state.register.genderItem
+  };
+}
+
+mapDispatchToProps = (dispatch) => {
+  return {
+    onChangeGender: (value, index) => dispatch(changeGender(value, index)),
+    onChangePicer: (bool) => dispatch(changePicker(bool))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PickerGender);
