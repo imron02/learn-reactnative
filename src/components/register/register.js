@@ -9,10 +9,6 @@ class Register extends Component {
     statusBarTextColorScheme: 'light'
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { navigator } = this.props;
 

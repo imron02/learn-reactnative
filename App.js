@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { Provider } from 'react-redux';
+import { Component } from 'react';
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './src/components/screens';
-import { Provider } from 'react-redux';
 import store from './src/stores/configureStore';
-import { connect } from 'react-redux';
 import { appInitialized } from './src/actions/app';
 
 registerScreens(store, Provider);

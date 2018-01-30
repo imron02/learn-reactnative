@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { TextInput, StyleSheet } from 'react-native';
 
 class Input extends Component {
-
   render() {
     const { placeholder } = this.props;
 
@@ -11,8 +10,9 @@ class Input extends Component {
         placeholder={placeholder}
         placeholderTextColor="rgba(255,255,255,0.7)"
         keyboardType="email-address"
-        underlineColorAndroid='rgba(0,0,0,0)'
-        style={styles.input} />
+        underlineColorAndroid="rgba(0,0,0,0)"
+        style={styles.input}
+      />
     );
   }
 }
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { Input };
+export default Input;

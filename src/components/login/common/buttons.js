@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 class Buttons extends Component {
   render() {
-    const { styleBtn, styleText, label, click } = this.props;
+    const { styleBtn, label, click } = this.props;
 
     return (
       <TouchableOpacity style={styleBtn ? styles.buttonLogin : null} onPress={click}>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Buttons };
+export default Buttons;

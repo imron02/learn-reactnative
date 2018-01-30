@@ -41,20 +41,24 @@ class LoginForm extends Component {
           autoCorrect={false}
           returnKeyType="next"
           onSubmitEditing={() => this.passwordInput.focus()}
-          onChangeText={(text) => this.setState({ username: text })} />
+          onChangeText={text => this.setState({ username: text })}
+        />
         <Input
-          inputRef={(input) => this.passwordInput = input}
+          inputRef={input => this.passwordInput = input}
           placeholder="Password"
           secureTextEntry={true}
           returnKeyType="go"
-          onChangeText={(text) => this.setState({ password: text })} />
-        <Buttons 
+          onChangeText={text => this.setState({ password: text })}
+        />
+        <Buttons
           styleBtn={true}
           label="LOGIN"
-          click={this._login} />
-        <Buttons 
+          click={this._login}
+        />
+        <Buttons
           label="New to Flutter Asia? Sign up"
-          click={this._register} />
+          click={this._register}
+        />
       </View>
     );
   }
@@ -66,17 +70,13 @@ const styles = StyleSheet.create({
   }
 });
 
-mapStateToProps = (state, ownProps) => {
-  return {
-    auth: state.auth
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  auth: state.auth
+});
 
-mapDispatchToProps = (dispatch) => {
-  return {
-    onLogin: (username, password) => dispatch(login(username, password)),
-    goToDashboard: () => dispatch(appDashboard())
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  onLogin: (username, password) => dispatch(login(username, password)),
+  goToDashboard: () => dispatch(appDashboard())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

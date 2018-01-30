@@ -9,7 +9,7 @@ class PickerGender extends Component {
   };
 
   onClick = () => {
-    let picker = !this.props.picker;
+    const picker = !this.props.picker;
     this.props.onChangePicer(picker);
   }
 
@@ -27,10 +27,11 @@ class PickerGender extends Component {
         <View style={styles.pickerItem}>
           <PickerIOS
             selectedValue={genderValue}
-            onValueChange={this.onValueChange}>
-            <PickerIOS.Item label="Select" value={"select"} />
-            <PickerIOS.Item label="Male" value={"male"} />
-            <PickerIOS.Item label="Female" value={"female"} />
+            onValueChange={this.onValueChange}
+          >
+            <PickerIOS.Item label="Select" value="select" />
+            <PickerIOS.Item label="Male" value="male" />
+            <PickerIOS.Item label="Female" value="female" />
           </PickerIOS>
         </View>
       </View>
@@ -60,19 +61,15 @@ const styles = StyleSheet.create({
   }
 });
 
-mapStateToProps = (state, ownProps) => {
-  return {
-    picker: state.register.picker,
-    genderValue: state.register.genderValue,
-    genderItem: state.register.genderItem
-  };
-}
+const mapStateToProps = (state, ownProps) => ({
+  picker: state.register.picker,
+  genderValue: state.register.genderValue,
+  genderItem: state.register.genderItem
+});
 
-mapDispatchToProps = (dispatch) => {
-  return {
-    onChangeGender: (value, index) => dispatch(changeGender(value, index)),
-    onChangePicer: (bool) => dispatch(changePicker(bool))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  onChangeGender: (value, index) => dispatch(changeGender(value, index)),
+  onChangePicer: bool => dispatch(changePicker(bool))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PickerGender);

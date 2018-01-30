@@ -11,10 +11,6 @@ import { Input } from './common';
 import PickerGender from './common/picker-gender';
 
 class RegisterForm extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   _backToLogin = () => {
     this.props.navigator.pop();
   }
@@ -22,8 +18,10 @@ class RegisterForm extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView keyboardShouldPersistTaps="always"
-          ref={(scrollView) => this.scrollView = scrollView}>
+        <ScrollView
+          keyboardShouldPersistTaps="always"
+          ref={scrollView => this.scrollView = scrollView}
+        >
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
             <View style={styles.formContainer}>
               <Input placeholder="Email" />
@@ -42,7 +40,7 @@ class RegisterForm extends Component {
               </TouchableOpacity>
             </View>
           </KeyboardAwareScrollView>
-        </ScrollView >
+        </ScrollView>
       </View>
     );
   }

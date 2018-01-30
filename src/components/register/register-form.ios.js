@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   View,
   StyleSheet,
@@ -10,13 +11,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Input } from './common';
 import PickerGender from './common/picker-gender';
 import GenderButton from './common/gender-button';
-import { connect } from 'react-redux';
 
 class RegisterForm extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.picker) {
       setTimeout(() => {
@@ -32,8 +28,10 @@ class RegisterForm extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView keyboardShouldPersistTaps="always"
-          ref={(scrollView) => this.scrollView = scrollView}>
+        <ScrollView
+          keyboardShouldPersistTaps="always"
+          ref={scrollView => this.scrollView = scrollView}
+        >
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
             <View style={styles.formContainer}>
               <Input placeholder="Email" />
@@ -43,7 +41,8 @@ class RegisterForm extends Component {
               <Input placeholder="Retype password" />
               <TouchableOpacity
                 style={styles.photoContainer}
-                onPress={this.onPhoto}>
+                onPress={this.onPhoto}
+              >
                 <Text style={styles.photoText}>Add Photo</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonRegister}>
@@ -100,10 +99,8 @@ const styles = StyleSheet.create({
   }
 });
 
-mapStateToProps = (state, ownProps) => {
-  return {
-    picker: state.register.picker
-  };
-}
+const mapStateToProps = (state, ownProps) => ({
+  picker: state.register.picker
+});
 
 export default connect(mapStateToProps)(RegisterForm);

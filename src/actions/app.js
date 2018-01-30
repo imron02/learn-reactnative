@@ -7,7 +7,7 @@ export function appInitialized() {
 }
 
 export function changeAppRoot(root) {
-  return { type: types.ROOT_CHANGED, root: root };
+  return { type: types.ROOT_CHANGED, root };
 }
 
 export function appDashboard() {

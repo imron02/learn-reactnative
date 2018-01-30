@@ -21,7 +21,7 @@ export default function reducer(state = initialState, action) {
         isLoggedIn: false,
         username: '',
         password: ''
-      }
+      };
     default:
       return state;
   }

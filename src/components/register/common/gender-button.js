@@ -4,17 +4,9 @@ import { connect } from 'react-redux';
 import { changePicker } from '../../../actions/register';
 
 class GenderButton extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  toUpperCase = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   onClick = () => {
     // Change picker
-    let picker = !this.props.picker;
+    const picker = !this.props.picker;
 
     // Update redux picker
     this.props.onChangePicker(picker);
@@ -23,8 +15,10 @@ class GenderButton extends Component {
     Keyboard.dismiss();
   }
 
+  toUpperCase = string => string.charAt(0).toUpperCase() + string.slice(1);
+
   render() {
-    let value = this.toUpperCase(this.props.genderValue);
+    const value = this.toUpperCase(this.props.genderValue);
 
     return (
       <TouchableOpacity style={styles.button} onPress={this.onClick}>
@@ -47,17 +41,13 @@ const styles = StyleSheet.create({
   },
 });
 
-mapStateToProps = (state, ownProps) => {
-  return {
-    picker: state.register.picker,
-    genderValue: state.register.genderValue
-  };
-}
+const mapStateToProps = (state, ownProps) => ({
+  picker: state.register.picker,
+  genderValue: state.register.genderValue
+});
 
-mapDispatchToProps = (dispatch) => {
-  return {
-    onChangePicker: (bool) => dispatch(changePicker(bool))
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  onChangePicker: bool => dispatch(changePicker(bool))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenderButton);

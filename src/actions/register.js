@@ -5,12 +5,12 @@ export function changeGender(value, index) {
     type: type.GENDER_CHANGED,
     genderValue: value,
     genderIndex: index
-  }
+  };
 }
 
 export function changePicker(bool) {
   return {
     type: type.PICKER_CHANGED,
     picker: bool
-  }
+  };
 }

@@ -19,10 +19,6 @@ class Login extends Component {
     statusBarTextColorScheme: 'light'
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   hideKeyboard() {
     Keyboard.dismiss();
   }

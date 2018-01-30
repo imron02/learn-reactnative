@@ -1,1 +1,5 @@
-export * from './input';
+import Input from './input';
+
+module.exports = {
+  Input
+};
