@@ -68,10 +68,6 @@ class RegisterForm extends Component {
                     source={{ uri: this.state.profilURI }}
                   />
                   : <Text style={styles.photoText}>Add Photo</Text>}
-                {/* <Image
-                  style={styles.profilURI}
-                  source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
-                /> */}
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonRegister}>
                 <Text style={styles.buttonTextRegister}>REGISTER</Text>
