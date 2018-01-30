@@ -4005,6 +4005,10 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-actionsheet@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-actionsheet/-/react-native-actionsheet-2.3.0.tgz#a9552a356dc5939829062353804d5e5609e8f969"
+
 react-native-image-crop-picker@^0.19.1:
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.19.1.tgz#29ac98104b89e623501d5bcf476ada875679cce8"
