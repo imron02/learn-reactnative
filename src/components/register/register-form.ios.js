@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ImagePicker from 'react-native-image-crop-picker';
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Text,
-  ScrollView
+  ScrollView,
+  Image
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Input } from './common';
@@ -13,6 +15,12 @@ import PickerGender from './common/picker-gender';
 import GenderButton from './common/gender-button';
 
 class RegisterForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { profilURI: null };
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.picker) {
       setTimeout(() => {
@@ -23,6 +31,17 @@ class RegisterForm extends Component {
 
   _backToLogin = () => {
     this.props.navigator.pop();
+  }
+
+  _onPhoto = () => {
+    ImagePicker.openPicker({
+      width: 170,
+      height: 170,
+      cropping: true,
+      mediaType: 'photo',
+      cropperCircleOverlay: true
+    }).then(image => this.setState({ profilURI: image.path }))
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -41,9 +60,18 @@ class RegisterForm extends Component {
               <Input placeholder="Retype password" />
               <TouchableOpacity
                 style={styles.photoContainer}
-                onPress={this.onPhoto}
+                onPress={this._onPhoto}
               >
-                <Text style={styles.photoText}>Add Photo</Text>
+                {this.state.profilURI
+                  ? <Image
+                    style={styles.profilURI}
+                    source={{ uri: this.state.profilURI }}
+                  />
+                  : <Text style={styles.photoText}>Add Photo</Text>}
+                {/* <Image
+                  style={styles.profilURI}
+                  source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+                /> */}
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonRegister}>
                 <Text style={styles.buttonTextRegister}>REGISTER</Text>
@@ -79,6 +107,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10
+  },
+  profilURI: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    borderRadius: 50
   },
   photoText: {
     fontSize: 15,
