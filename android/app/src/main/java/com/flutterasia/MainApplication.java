@@ -3,6 +3,7 @@ package com.flutterasia;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 // import com.reactnativenavigation.NavigationReactPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -24,7 +25,8 @@ public class MainApplication extends NavigationApplication {
   //   @Override
   //   protected List<ReactPackage> getPackages() {
   //     return Arrays.<ReactPackage>asList(
-  //         new MainReactPackage()
+  //         new MainReactPackage(),
+            new PickerPackage()
   //     );
   //   }
 
