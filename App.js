@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import { Component } from 'react';
 import { Navigation } from 'react-native-navigation';
-import { registerScreens } from './src/components/screens';
+import registerScreens from './src/components/screens';
 import store from './src/stores/configureStore';
 import { appInitialized } from './src/actions/app';
 
