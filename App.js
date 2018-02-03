@@ -40,18 +40,11 @@ class App extends Component {
         });
         break;
       case 'login':
-        Navigation.startTabBasedApp({
-          tabs: [
-            {
-              label: 'Find Love',
-              screen: 'flutterasia.TabHomeScreen',
-              icon: require('./src/images/find-love.png'),
-              title: 'Find Love'
-            }
-          ],
-          appStyle: {
-            tabBarBackgroundColor: '#3498db'
-          },
+        Navigation.startSingleScreenApp({
+          screen: {
+            screen: 'flutterasia.TabHomeScreen',
+            title: 'Find Love'
+          }
         });
         break;
       default:
