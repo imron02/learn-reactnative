@@ -27,7 +27,7 @@ class App extends Component {
 
   startApp(root) {
     switch (root) {
-      case 'login':
+      case 'dashboard':
         Navigation.startSingleScreenApp({
           screen: {
             screen: 'flutterasia.LoginScreen',
@@ -39,16 +39,19 @@ class App extends Component {
           }
         });
         break;
-      case 'dashboard':
-        Navigation.startSingleScreenApp({
-          screen: {
-            screen: 'flutterasia.RegisterScreen',
-            title: 'Login',
-            navigatorStyle: {
-              navBarHidden: true
-            },
-            navigatorButtons: {}
-          }
+      case 'login':
+        Navigation.startTabBasedApp({
+          tabs: [
+            {
+              label: 'Find Love',
+              screen: 'flutterasia.TabHomeScreen',
+              icon: require('./src/images/find-love.png'),
+              title: 'Find Love'
+            }
+          ],
+          appStyle: {
+            tabBarBackgroundColor: '#3498db'
+          },
         });
         break;
       default:
