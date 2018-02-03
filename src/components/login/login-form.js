@@ -22,7 +22,7 @@ class LoginForm extends Component {
     this.props.onLogin(this.state.username, this.state.password);
 
     // Change root view
-    // this.props.goToDashboard();
+    this.props.goToDashboard();
   }
 
   _register = () => {
