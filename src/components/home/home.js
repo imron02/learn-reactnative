@@ -1,22 +1,87 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+
+const initialLayout = {
+  height: 0,
+  width: Dimensions.get('window').width,
+};
+
+const FirstRoute = () => (
+  <View style={[styles.container, { backgroundColor: '#ff4081' }]}>
+    <Text>Nearby</Text>
+  </View>
+);
+
+const SecondRoute = () => (
+  <View style={[styles.container, { backgroundColor: '#673ab7' }]}>
+    <Text>Match</Text>
+  </View>
+);
 
 class TabHome extends Component {
   static navigatorStyle = {
     navBarTextColor: 'rgba(255,255,255,0.7)',
     navBarBackgroundColor: '#3498db',
-    navBarButtonColor: 'rgba(255,255,255,0.7)',
-    statusBarTextColorScheme: 'light'
+    topBarElevationShadowEnabled: false
   };
+
+  state = {
+    index: 2,
+    routes: [
+      { key: 'nearby', title: 'Nearby' },
+      { key: 'match', title: 'Match' },
+      { key: 'findLove', title: 'Find Love' },
+      { key: 'chat', title: 'Chat' },
+      { key: 'profile', title: 'Profile' },
+    ]
+  };
+
+  _handleIndexChange = index => this.setState({ index });
+
+  _renderHeader = props => (
+    <TabBar
+      {...props}
+      labelStyle={styles.label}
+    />
+  );
+
+  _renderScene = SceneMap({
+    nearby: FirstRoute,
+    match: SecondRoute,
+    findLove: FirstRoute,
+    chat: SecondRoute,
+    profile: FirstRoute,
+  });
 
   render() {
     return (
-      <View>
-        <Text>Hello</Text>
-      </View>
+      <TabViewAnimated
+        style={styles.container}
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderHeader={this._renderHeader}
+        onIndexChange={this._handleIndexChange}
+        initialLayout={initialLayout}
+        useNativeDriver
+      />
     );
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  label: {
+    color: '#fff',
+    fontSize: 10,
+    textAlign: 'center'
+  },
+  icon: {
+    width: 24,
+    height: 24
+  }
+});
 
 export default TabHome;
