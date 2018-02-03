@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-// import com.reactnativenavigation.NavigationReactPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -13,6 +12,9 @@ import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
 import java.util.List;
+
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 
 public class MainApplication extends NavigationApplication {
   @Override
@@ -26,7 +28,9 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
     // eg. new VectorIconsPackage()
-      new PickerPackage()
+      new PickerPackage(),
+      new RNFirebasePackage(),
+      new RNFirebaseFirestorePackage()
     );
   }
 

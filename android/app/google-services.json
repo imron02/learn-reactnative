@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "114336501875",
+    "firebase_url": "https://flutterasia-ed3d5.firebaseio.com",
+    "project_id": "flutterasia-ed3d5",
+    "storage_bucket": "flutterasia-ed3d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114336501875:android:b4f881d5bf5fb61c",
+        "android_client_info": {
+          "package_name": "com.flutterasia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114336501875-bjnuv6ilbb0pa4k63kk9p7moe5dhela8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1MnEoLusmsY3PZ-EI6U67eEcRT8P7BcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
