@@ -27,12 +27,12 @@ class TabHome extends Component {
   };
 
   state = {
-    index: 2,
+    index: 0,
     routes: [
-      { key: 'nearby', title: 'Nearby' },
-      { key: 'match', title: 'Match' },
       { key: 'findLove', title: 'Find Love' },
+      { key: 'match', title: 'Match' },
       { key: 'chat', title: 'Chat' },
+      { key: 'nearby', title: 'Nearby' },
       { key: 'profile', title: 'Profile' },
     ]
   };
@@ -41,6 +41,7 @@ class TabHome extends Component {
 
   _renderHeader = props => (
     <TabBar
+      scrollEnabled
       {...props}
       labelStyle={styles.label}
     />
@@ -75,8 +76,6 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#fff',
-    fontSize: 10,
-    textAlign: 'center'
   },
   icon: {
     width: 24,
