@@ -19,7 +19,7 @@ const SecondRoute = () => (
   </View>
 );
 
-class TabHome extends Component {
+class Tabs extends Component {
   static navigatorStyle = {
     navBarTextColor: 'rgba(255,255,255,0.7)',
     navBarBackgroundColor: '#3498db',
@@ -44,6 +44,7 @@ class TabHome extends Component {
       scrollEnabled
       {...props}
       labelStyle={styles.label}
+      indicatorStyle={styles.indicator}
     />
   );
 
@@ -77,10 +78,9 @@ const styles = StyleSheet.create({
   label: {
     color: '#fff',
   },
-  icon: {
-    width: 24,
-    height: 24
+  indicator: {
+    backgroundColor: 'rgba(255,255,255,0.7)'
   }
 });
 
-export default TabHome;
+export default Tabs;
