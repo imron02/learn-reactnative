@@ -42,7 +42,7 @@ class App extends Component {
       case 'login':
         Navigation.startSingleScreenApp({
           screen: {
-            screen: 'flutterasia.TabHomeScreen',
+            screen: 'flutterasia.TabsScreen',
             title: 'Find Love'
           }
         });
