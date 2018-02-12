@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  AsyncStorage
+} from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import { Navigation } from 'react-native-navigation';
 
 const initialLayout = {
   height: 0,
@@ -36,6 +43,25 @@ class Tabs extends Component {
       { key: 'profile', title: 'Profile' },
     ]
   };
+
+  async componentWillMount() {
+    // Check user is already log in or not
+    try {
+      const user = await AsyncStorage.getItem('isLoggedIn');
+
+      if (!user) {
+        Navigation.showModal({
+          screen: 'flutterasia.LoginScreen',
+          title: 'Login',
+          navigatorButtons: {
+            leftButtons: [{}]
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   _handleIndexChange = index => this.setState({ index });
 
