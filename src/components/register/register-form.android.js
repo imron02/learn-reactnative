@@ -9,11 +9,9 @@ import { Input, Buttons, ProfilePicture } from './common';
 import PickerGender from './common/picker-gender';
 
 class RegisterForm extends Component {
-  _backToLogin = () => {
-    this.props.navigator.pop();
-  }
-
   render() {
+    const { nav } = this.props;
+
     return (
       <View style={styles.container}>
         <ScrollView
@@ -28,7 +26,7 @@ class RegisterForm extends Component {
               <Input placeholder="Password" />
               <Input placeholder="Retype password" />
               <ProfilePicture />
-              <Buttons navigator={navigator} />
+              <Buttons nav={nav} />
             </View>
           </KeyboardAwareScrollView>
         </ScrollView>

@@ -13,7 +13,7 @@ class Register extends Component {
     const { navigator } = this.props;
 
     return (
-      <RegisterForm navigator={navigator} />
+      <RegisterForm nav={navigator} />
     );
   }
 }

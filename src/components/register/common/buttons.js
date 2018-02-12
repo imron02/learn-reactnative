@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 class Buttons extends Component {
   _backToLogin = () => {
-    this.props.navigator.pop();
+    this.props.nav.pop();
   }
 
   render() {
