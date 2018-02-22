@@ -19,10 +19,12 @@ class LoginForm extends Component {
   }
 
   _login = () => {
-    this.props.onLogin(this.state.username, this.state.password);
+    console.log('Login pak');
 
-    // Change root view
-    this.props.goToDashboard();
+    // this.props.onLogin(this.state.username, this.state.password);
+
+    // // Change root view
+    // this.props.goToDashboard();
   }
 
   _register = () => {

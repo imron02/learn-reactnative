@@ -7,7 +7,6 @@ import {
   AsyncStorage
 } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import { Navigation } from 'react-native-navigation';
 
 const initialLayout = {
   height: 0,
@@ -50,7 +49,7 @@ class Tabs extends Component {
       const user = await AsyncStorage.getItem('isLoggedIn');
 
       if (!user) {
-        Navigation.showModal({
+        this.props.navigator.showModal({
           screen: 'flutterasia.LoginScreen',
           title: 'Login',
           navigatorButtons: {

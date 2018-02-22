@@ -7,7 +7,8 @@ import {
   KeyboardAvoidingView,
   StatusBar,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  BackHandler
 } from 'react-native';
 import LoginForm from './login-form';
 
@@ -17,6 +18,28 @@ class Login extends Component {
     navBarBackgroundColor: '#3498db',
     navBarButtonColor: 'rgba(255,255,255,0.7)',
     statusBarTextColorScheme: 'light'
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
+  onNavigatorEvent(event) {
+    switch (event.id) {
+      case 'didAppear':
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        break;
+      case 'didDisappear':
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleBackPress = () => {
+    console.log('will apear');
   };
 
   hideKeyboard() {
